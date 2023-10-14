@@ -14,7 +14,7 @@ pipeline {
         }
         stage('deploy') {
             steps {
-                sh 'sudo cp /var/lip/jenkins/workspace/multiBranchPipeLineOne_developer/target/hello-world-war-1.0.0.war /var/lib/tomcat9/webapps'
+                sh 'sudo cp /var/lib/jenkins/workspace/multiBranchPipeLineOne_developer/target/hello-world-war-1.0.0.war /var/lib/tomcat9/webapps'
             }
         }
     }
