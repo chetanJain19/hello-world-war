@@ -17,6 +17,5 @@ pipeline {
                 sh 'sudo cp /var/lip/jenkins/workspace/multiBranchPipeLineOne_developer/target/hello-world-war-1.0.0.war /var/lib/tomcat9/webapps'
             }
         }
-        }
     }
 }
