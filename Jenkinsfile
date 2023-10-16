@@ -1,21 +1,31 @@
 pipeline {
-    agent any
-    stages {
+    agent none
+      stages {
         stage('checkout') {
-            steps {	
-		sh 'rm -rf hello-world-war'
-                sh 'git clone https://github.com/chetanJain19/hello-world-war/'
+	    agent {
+	     label 'slave1'
+            }
+            steps {
+		sh 'rm -rf hello-world-war'    
+		sh 'git clone https://github.com/chetanJain19/hello-world-war.git'
             }
         }
 	stage('Build') {
-            steps {					
-                sh 'mvn clean package'
+	    agent {
+	    label 'slave1'
             }
-        }
-	stage('deploy') {
+            steps {		
+		sh 'mvn clean package'
+	    }
+	}
+        stage('deploy') {
+	     agent {
+	     label 'slave2'
+            }
             steps {
-                sh 'sudo cp /var/lib/jenkins/workspace/multiBranchPipeLineOne_developer/target/hello-world-war-3.0.0.war /var/lib/tomcat9/webapps'
+		    echo "good "
+	            // sh 'sudo cp /var/lib/jenkins/workspace/multiBranchPipeLineOne/target/hello-world-war-3.0.0.war /var/lib/tomcat9/webapps'//
             }
-        }	    
+        }    
     }
 }
